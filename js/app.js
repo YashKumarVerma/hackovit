@@ -6,7 +6,7 @@ let input;
 let url;
 
 //converting it the sha65
-//Sourced from : geraintluff.github.io
+//Sourced from : https://geraintluff.github.io/sha256/
 var sha256 = function sha256(ascii) {
 	function rightRotate(value, amount) {
 		return (value>>>amount) | (value<<(32 - amount));
