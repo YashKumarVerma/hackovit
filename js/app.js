@@ -1,9 +1,8 @@
 //This is the mechanics of the JavaScript Extension
 
 //taking the input from the extension Page
-let input;
+let output;
 //making it a complete URL
-let url;
 
 //converting it the sha65
 //Sourced from : https://geraintluff.github.io/sha256/
@@ -85,28 +84,36 @@ var sha256 = function sha256(ascii) {
 	return result;
 };
 
+function getInputValue() {
+    let input = document.getElementById("inputBox").value;
+    output = sha256(input);
+    getData();
+}
+
 //now using the the API of the virus total
 async function getData() {
+    let res = output;
     //variable
     let json;
     //api URL
     const apiUrl = new URL("https://www.virustotal.com/vtapi/v2/url/report");
     //URL Parameters
     let params =  {
-        "apikey": 'c56702292505c0d8e5c0b604ed785a78d383c1c4679bcdd3eadbad8c5daee557',
-        "resource": some//value returned by the sha256 function
+        "apikey": "c56702292505c0d8e5c0b604ed785a78d383c1c4679bcdd3eadbad8c5daee557",
+        "resource": res //value returned by the sha256 function
     };
     //Binding the Parameters to the URL
     Object.keys(params).forEach(key => apiUrl.searchParams.append(key, params[key]));
 
     //fetching the data
     const response = await fetch(apiUrl, {
-        method : 'GET'
+        method : 'GET',
     });
 
     //checking the response
     if(response.ok) {
         json = await response.json();
+        console.log(json);
     } else {
         console.log("Response_Error" + response.status);
     }
