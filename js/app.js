@@ -114,4 +114,5 @@ async function getData() {
     //function to iterate through the JSON file
         //here i will write the function to
         //iterate through the nested JSON reaponse
+        //i will write this when i receieve the output
 }
