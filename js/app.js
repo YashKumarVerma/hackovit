@@ -6,7 +6,7 @@ let input;
 let url;
 
 //converting it the sha65
-//code adapted from : https://geraintluff.github.io
+//Sourced from : geraintluff.github.io
 var sha256 = function sha256(ascii) {
 	function rightRotate(value, amount) {
 		return (value>>>amount) | (value<<(32 - amount));
@@ -86,4 +86,32 @@ var sha256 = function sha256(ascii) {
 };
 
 //now using the the API of the virus total
-let apiUrl = 'https://www.virustotal.com/vtapi/v2/url/report';
+async function getData() {
+    //variable
+    let json;
+    //api URL
+    const apiUrl = new URL("https://www.virustotal.com/vtapi/v2/url/report");
+    //URL Parameters
+    let params =  {
+        "apikey": 'c56702292505c0d8e5c0b604ed785a78d383c1c4679bcdd3eadbad8c5daee557',
+        "resource": some//value returned by the sha256 function
+    };
+    //Binding the Parameters to the URL
+    Object.keys(params).forEach(key => apiUrl.searchParams.append(key, params[key]));
+
+    //fetching the data
+    const response = await fetch(apiUrl, {
+        method : 'GET'
+    });
+
+    //checking the response
+    if(response.ok) {
+        json = await response.json();
+    } else {
+        console.log("Response_Error" + response.status);
+    }
+
+    //function to iterate through the JSON file
+        //here i will write the function to
+        //iterate through the nested JSON reaponse
+}
